@@ -44,3 +44,5 @@ export default class EditingTask extends React.Component {
     );
   }
 }
+
+console.log('hello')
