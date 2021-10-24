@@ -17,15 +17,15 @@ export default class NewTaskForm extends React.Component {
   };
 
   onSubmit = (event) => {
-    const {addTask} = this.props;
-    const {value} = this.state;
+    const { addTask } = this.props;
+    const { value } = this.state;
     event.preventDefault();
     addTask(value);
     this.setState({ value: '' });
   };
 
   render() {
-    const {value} = this.state;
+    const { value } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
         <input

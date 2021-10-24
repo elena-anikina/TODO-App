@@ -25,7 +25,7 @@ export default class App extends React.Component {
   };
 
   deleteTask = (id) => {
-    const {data} = this.state;
+    const { data } = this.state;
     const newData = data.filter((task) => task.id !== id);
     this.setState(() => ({ data: newData }));
   };
@@ -83,7 +83,7 @@ export default class App extends React.Component {
   };
 
   render() {
-    const {data} = this.state;
+    const { data } = this.state;
     return (
       <section className="todoapp">
         <Header />

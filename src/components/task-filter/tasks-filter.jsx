@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class TasksFilter extends React.Component {
   static defaultProps = {
-    filter: () => 'filter'
+    filter: () => 'filter',
   };
 
   static propTypes = {
@@ -21,17 +21,23 @@ export default class TasksFilter extends React.Component {
   };
 
   render() {
-      const {all, active, completed} = this.state;
+    const { all, active, completed } = this.state;
     return (
       <ul className="filters" onClick={this.func} onKeyDown={this.func}>
         <li>
-          <button className={all} type="button">All</button>
+          <button className={all} type="button">
+            All
+          </button>
         </li>
         <li>
-          <button className={active} type="button">Active</button>
+          <button className={active} type="button">
+            Active
+          </button>
         </li>
         <li>
-          <button className={completed} type="button">Completed</button>
+          <button className={completed} type="button">
+            Completed
+          </button>
         </li>
       </ul>
     );

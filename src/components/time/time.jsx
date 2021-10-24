@@ -25,7 +25,7 @@ export default class Time extends React.Component {
   }
 
   render() {
-    const {created} = this.state;
+    const { created } = this.state;
     return <span className="created">created {created} ago</span>;
   }
 }

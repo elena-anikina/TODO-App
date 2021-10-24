@@ -21,8 +21,8 @@ export default class EditingTask extends React.Component {
   };
 
   onSubmit = (event) => {
-    const {id, editTask} = this.props;
-    const {value} = this.state;
+    const { id, editTask } = this.props;
+    const { value } = this.state;
 
     event.preventDefault();
     editTask(id, value);
@@ -30,19 +30,13 @@ export default class EditingTask extends React.Component {
   };
 
   render() {
-    const {value} = this.state;
+    const { value } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          type="text"
-          className="edit"
-          placeholder="Edit your task"
-          value={value}
-          onChange={this.onLabelChange}
-        />
+        <input type="text" className="edit" placeholder="Edit your task" value={value} onChange={this.onLabelChange} />
       </form>
     );
   }
 }
 
-console.log('hello')
+console.log('hello');
