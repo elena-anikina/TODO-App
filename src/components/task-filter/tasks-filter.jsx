@@ -13,17 +13,20 @@ export default class TasksFilter extends React.Component {
   state = { all: 'selected', active: '', completed: '' };
 
   func = (event) => {
+    const { filter: filterFunc } = this.props;
     const filter = event.target.textContent.toLowerCase();
     if (filter === 'all') this.setState({ all: 'selected', active: '', completed: '' });
     if (filter === 'active') this.setState({ all: '', active: 'selected', completed: '' });
     if (filter === 'completed') this.setState({ all: '', active: '', completed: 'selected' });
-    this.props.filter(filter);
+    filterFunc(filter);
   };
 
   render() {
     const { all, active, completed } = this.state;
     return (
       <ul className="filters" onClick={this.func} onKeyDown={this.func}>
+        {' '}
+        {/*eslint-disable-line*/}
         <li>
           <button className={all} type="button">
             All

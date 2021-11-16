@@ -1,0 +1,31 @@
+.taskTimer-button {
+  -webkit-font-smoothing: antialiased;
+  appearance: none;
+  background: none;
+  border: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  cursor: pointer;
+}
+
+.taskTimer-description {
+  color: gray;
+  font-size: 13px;
+}
+
+.taskTimer-iconPlay {
+  font-size: 15px;
+}
+
+.taskTimer-iconPause::after {
+  content: '⏸';
+}
+
+.taskTimer-iconPlay::after {
+  content: '▶';
+}

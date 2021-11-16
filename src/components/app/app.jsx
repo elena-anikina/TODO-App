@@ -8,16 +8,28 @@ export default class App extends React.Component {
 
   state = {
     data: [
-      { id: 1, name: 'Drink Coffee', status: 'active', editing: false, render: true },
-      { id: 2, name: 'Learn React', status: 'active', editing: false, render: true },
-      { id: 3, name: 'Coding', status: 'active', editing: false, render: true },
-      { id: 4, name: 'Creat React app', status: 'active', editing: false, render: true },
-      { id: 5, name: 'Better every day', status: 'active', editing: false, render: true },
+      { id: 1, name: 'Drink Coffee', status: 'active', editing: false, render: true, timer: [12, 0] },
+      { id: 2, name: 'Learn React', status: 'active', editing: false, render: true, timer: [47, 16] },
+      { id: 3, name: 'Coding', status: 'active', editing: false, render: true, timer: [56, 35] },
+      { id: 4, name: 'Creat app', status: 'active', editing: false, render: true, timer: [36, 34] },
+      { id: 5, name: 'Every day', status: 'active', editing: false, render: true, timer: [15, 5] },
     ],
   };
 
-  addTask = (text) => {
-    const newTask = { id: ++this.maxId, name: text, status: 'active', editing: false, render: true };
+  addTask = (text, min, sec) => {
+    const minVar = Number(min) || 0;
+    let secVar = Number(sec) || 0;
+    if (secVar > 59) {
+      secVar = 0;
+    }
+    const newTask = {
+      id: (this.maxId += 1),
+      name: text,
+      status: 'active',
+      editing: false,
+      render: true,
+      timer: [minVar, secVar],
+    };
     this.setState(({ data }) => {
       const newData = [...data, newTask];
       return { data: newData };
