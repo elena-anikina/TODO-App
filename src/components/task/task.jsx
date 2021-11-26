@@ -1,26 +1,36 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './task.css';
-import Time from '../time/time';
-import EditingTask from '../editing-task/editing-task';
-import TaskTimer from '../task-timer/task-timer';
+import "./task.css";
+import Time from "../time/time";
+import EditingTask from "../editing-task/editing-task";
+import TaskTimer from "../task-timer/task-timer";
 
 const Task = ({ data, deleteTask, editStatus, editTask, toggleStatus }) => {
   const { name, id, status, editing, timer } = data;
-  const render = data.render ? 'visible' : 'invisible';
-  const taskType = editing ? 'editing' : status;
+  const render = data.render ? "visible" : "invisible";
+  const taskType = editing ? "editing" : status;
 
   return (
     <li className={`${taskType} ${render}`}>
       <div className="view">
-        <input className="toggle" type="checkbox" checked={status === 'completed'} onChange={() => toggleStatus(id)} />
+        <input
+          className="toggle"
+          type="checkbox"
+          checked={status === "completed"}
+          onChange={() => toggleStatus(id)}
+        />
         <label>
           <span className="description">{name}</span>
           <TaskTimer timer={timer} />
           <Time />
         </label>
-        <button className="icon icon-edit" type="button" onClick={() => editStatus(id)} aria-label="edit" />
+        <button
+          className="icon icon-edit"
+          type="button"
+          onClick={() => editStatus(id)}
+          aria-label="edit"
+        />
         <button
           className="icon icon-destroy"
           type="button"
@@ -30,17 +40,19 @@ const Task = ({ data, deleteTask, editStatus, editTask, toggleStatus }) => {
           aria-label="delete"
         />
       </div>
-      {taskType === 'editing' && <EditingTask id={id} editTask={editTask} />}
+      {taskType === "editing" && (
+        <EditingTask id={id} task={name} editTask={editTask} />
+      )}
     </li>
   );
 };
 
 Task.defaultProps = {
-  data: { id: 12345, name: 'Example', status: 'active', render: true },
-  deleteTask: () => 'deleteTask',
-  editStatus: () => 'editStatus',
-  editTask: () => 'editTask',
-  toggleStatus: () => 'toggleStatus',
+  data: { id: 12345, name: "Example", status: "active", render: true },
+  deleteTask: () => "deleteTask",
+  editStatus: () => "editStatus",
+  editTask: () => "editTask",
+  toggleStatus: () => "toggleStatus",
 };
 
 Task.propTypes = {

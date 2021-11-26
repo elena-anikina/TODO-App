@@ -1,40 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-export default class EditingTask extends React.Component {
-  static defaultProps = {
-    id: 12345,
-    editTask: () => 'editTask',
+const EditingTask = ({ id, editTask, task }) => {
+  const [value, setValue] = useState(task);
+
+  const onLabelChange = (event) => {
+    setValue(event.target.value);
   };
 
-  static propTypes = {
-    id: PropTypes.number,
-    editTask: PropTypes.func,
-  };
-
-  state = {
-    value: '',
-  };
-
-  onLabelChange = (event) => {
-    this.setState({ value: event.target.value });
-  };
-
-  onSubmit = (event) => {
-    const { id, editTask } = this.props;
-    const { value } = this.state;
-
+  const onSubmit = (event) => {
     event.preventDefault();
     editTask(id, value);
-    this.setState({ value: '' });
+    setValue(() => "");
   };
 
-  render() {
-    const { value } = this.state;
-    return (
-      <form onSubmit={this.onSubmit}>
-        <input type="text" className="edit" placeholder="Edit your task" value={value} onChange={this.onLabelChange} />
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={onSubmit}>
+      <input
+        type="text"
+        className="edit"
+        placeholder="Edit your task"
+        value={value}
+        onChange={onLabelChange}
+      />
+    </form>
+  );
+};
+
+export default EditingTask;
+
+EditingTask.defaultProps = {
+  id: 12345,
+  editTask: () => "editTask",
+  task: "task text",
+};
+
+EditingTask.propTypes = {
+  id: PropTypes.number,
+  editTask: PropTypes.func,
+  task: PropTypes.string,
+};

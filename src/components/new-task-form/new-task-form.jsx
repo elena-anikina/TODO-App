@@ -1,82 +1,79 @@
-import React from 'react';
-import './new-task-form.css';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import "./new-task-form.css";
+import PropTypes from "prop-types";
 
-export default class NewTaskForm extends React.Component {
-  static defaultProps = {
-    addTask: () => 'addTask',
+const NewTaskForm = ({ addTask }) => {
+  const [value, setValue] = useState("");
+  const [minValue, setMinValue] = useState("");
+  const [secValue, setSecValue] = useState("");
+
+  const onLabelChange = (event) => {
+    setValue(event.target.value);
   };
 
-  static propTypes = {
-    addTask: PropTypes.func,
+  const onMinChange = (event) => {
+    setMinValue(event.target.value);
   };
 
-  state = {
-    value: '',
-    minValue: '',
-    secValue: '',
+  const onSecChange = (event) => {
+    setSecValue(event.target.value);
   };
 
-  onLabelChange = (event) => {
-    this.setState({ value: event.target.value });
-  };
-
-  onMinChange = (event) => {
-    this.setState({ minValue: event.target.value });
-  };
-
-  onSecChange = (event) => {
-    this.setState({ secValue: event.target.value });
-  };
-
-  onSubmit = (event) => {
-    const { addTask } = this.props;
-    const { value, minValue, secValue } = this.state;
+  const onSubmit = (event) => {
     event.preventDefault();
     addTask(value, minValue, secValue);
-    this.setState({ value: '', minValue: '', secValue: '' });
+    setValue("");
+    setMinValue("");
+    setSecValue("");
   };
 
-  onSubmitMin = (event) => {
+  const onSubmitMin = (event) => {
     if (event.keyCode === 13) {
-      this.onSubmit(event);
+      onSubmit(event);
     }
   };
 
-  onSubmitSec = (event) => {
+  const onSubmitSec = (event) => {
     if (event.keyCode === 13) {
-      this.onSubmit(event);
+      onSubmit(event);
     }
   };
 
-  render() {
-    const { value, minValue, secValue } = this.state;
-    return (
-      <div className="new-task-form">
-        <form onSubmit={this.onSubmit}>
-          <input
-            className="new-todo"
-            placeholder="What needs to be done?"
-            value={value}
-            onChange={this.onLabelChange}
-            autoFocus /* eslint-disable-line */
-          />
-        </form>
+  return (
+    <div className="new-task-form">
+      <form onSubmit={onSubmit}>
         <input
-          className="new-todo-form__timer"
-          placeholder="Min"
-          value={minValue}
-          onChange={this.onMinChange}
-          onKeyUp={this.onSubmitMin}
+          className="new-todo"
+          placeholder="What needs to be done?"
+          value={value}
+          onChange={onLabelChange}
+          autoFocus /* eslint-disable-line */
         />
-        <input
-          className="new-todo-form__timer"
-          placeholder="Sec"
-          value={secValue}
-          onChange={this.onSecChange}
-          onKeyUp={this.onSubmitSec}
-        />
-      </div>
-    );
-  }
-}
+      </form>
+      <input
+        className="new-todo-form__timer"
+        placeholder="Min"
+        value={minValue}
+        onChange={onMinChange}
+        onKeyUp={onSubmitMin}
+      />
+      <input
+        className="new-todo-form__timer"
+        placeholder="Sec"
+        value={secValue}
+        onChange={onSecChange}
+        onKeyUp={onSubmitSec}
+      />
+    </div>
+  );
+};
+
+export default NewTaskForm;
+
+NewTaskForm.defaultProps = {
+  addTask: () => "addTask",
+};
+
+NewTaskForm.propTypes = {
+  addTask: PropTypes.func,
+};

@@ -1,31 +1,23 @@
-import React from 'react';
-import { formatDistanceToNow } from 'date-fns';
+import React, { useState } from "react";
+import { formatDistanceToNow } from "date-fns";
 
-import './time.css';
+import "./time.css";
 
-export default class Time extends React.Component {
-  created = new Date();
+const Time = () => {
+  const theMoment = new Date();
+  const [created, setCreated] = useState(
+    formatDistanceToNow(theMoment, { includeSeconds: true })
+  );
 
-  state = {
-    created: formatDistanceToNow(this.created, { includeSeconds: true }),
-  };
+  const tick = () =>
+    setCreated(formatDistanceToNow(theMoment, { includeSeconds: true }));
 
-  componentDidMount() {
-    this.timerId = setInterval(() => this.tick(), 1000);
-  }
+  useState(() => {
+    const timerId = setInterval(() => tick(), 1000);
+    return () => clearInterval(timerId);
+  });
 
-  componentWillUnmount() {
-    clearInterval(this.timerId);
-  }
+  return <span className="created">created {created} ago</span>;
+};
 
-  tick() {
-    this.setState({
-      created: formatDistanceToNow(this.created, { includeSeconds: true }),
-    });
-  }
-
-  render() {
-    const { created } = this.state;
-    return <span className="created">created {created} ago</span>;
-  }
-}
+export default Time;

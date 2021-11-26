@@ -1,10 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import NewTaskForm from '../new-task-form/new-task-form';
-import TaskList from '../task-list/task-list';
-import Footer from '../footer/footer';
+import React from "react";
+import PropTypes from "prop-types";
+import NewTaskForm from "../new-task-form/new-task-form";
+import TaskList from "../task-list/task-list";
+import Footer from "../footer/footer";
 
-const Main = ({ data, addTask, deleteTask, deleteCompleted, editStatus, editTask, filter, toggleStatus }) => (
+const Main = ({
+  data,
+  addTask,
+  deleteTask,
+  deleteCompleted,
+  editStatus,
+  editTask,
+  filter,
+  toggleStatus,
+}) => (
   <section className="main">
     <NewTaskForm addTask={addTask} />
     <TaskList
@@ -19,14 +28,14 @@ const Main = ({ data, addTask, deleteTask, deleteCompleted, editStatus, editTask
 );
 
 Main.defaultProps = {
-  data: [{ id: 12345, name: 'Example', status: 'active', render: true }],
-  addTask: () => 'addTask',
-  deleteTask: () => 'deleteTask',
-  deleteCompleted: () => 'deleteCompleted',
-  editStatus: () => 'editStatus',
-  editTask: () => 'editTask',
-  filter: () => 'filter',
-  toggleStatus: () => 'toggleStatus',
+  data: [{ id: 12345, name: "Example", status: "active", render: true }],
+  addTask: () => "addTask",
+  deleteTask: () => "deleteTask",
+  deleteCompleted: () => "deleteCompleted",
+  editStatus: () => "editStatus",
+  editTask: () => "editTask",
+  filter: () => "filter",
+  toggleStatus: () => "toggleStatus",
 };
 
 Main.propTypes = {

@@ -22,10 +22,14 @@
   font-size: 15px;
 }
 
+.taskTimer-iconPlay:hover {
+  color: #af5b5e;
+}
+
 .taskTimer-iconPause::after {
-  content: '⏸';
+  content: "⏸";
 }
 
 .taskTimer-iconPlay::after {
-  content: '▶';
+  content: "▶";
 }

@@ -1,48 +1,63 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-export default class TasksFilter extends React.Component {
-  static defaultProps = {
-    filter: () => 'filter',
-  };
+const TasksFilter = ({ filter: filterFunc }) => {
+  const [filterState, setFilterState] = useState({
+    all: "selected",
+    active: "",
+    completed: "",
+  });
 
-  static propTypes = {
-    filter: PropTypes.func,
-  };
-
-  state = { all: 'selected', active: '', completed: '' };
-
-  func = (event) => {
-    const { filter: filterFunc } = this.props;
+  const func = (event) => {
     const filter = event.target.textContent.toLowerCase();
-    if (filter === 'all') this.setState({ all: 'selected', active: '', completed: '' });
-    if (filter === 'active') this.setState({ all: '', active: 'selected', completed: '' });
-    if (filter === 'completed') this.setState({ all: '', active: '', completed: 'selected' });
+    if (filter === "all")
+      setFilterState({ all: "selected", active: "", completed: "" });
+    if (filter === "active")
+      setFilterState({ all: "", active: "selected", completed: "" });
+    if (filter === "completed")
+      setFilterState({ all: "", active: "", completed: "selected" });
     filterFunc(filter);
   };
 
-  render() {
-    const { all, active, completed } = this.state;
-    return (
-      <ul className="filters" onClick={this.func} onKeyDown={this.func}>
-        {' '}
-        {/*eslint-disable-line*/}
-        <li>
-          <button className={all} type="button">
-            All
-          </button>
-        </li>
-        <li>
-          <button className={active} type="button">
-            Active
-          </button>
-        </li>
-        <li>
-          <button className={completed} type="button">
-            Completed
-          </button>
-        </li>
-      </ul>
-    );
-  }
-}
+  const { all, active, completed } = filterState;
+  return (
+    <ul className="filters">
+      {" "}
+      <li>
+        <button className={all} type="button" onClick={func} onKeyDown={func}>
+          All
+        </button>
+      </li>
+      <li>
+        <button
+          className={active}
+          type="button"
+          onClick={func}
+          onKeyDown={func}
+        >
+          Active
+        </button>
+      </li>
+      <li>
+        <button
+          className={completed}
+          type="button"
+          onClick={func}
+          onKeyDown={func}
+        >
+          Completed
+        </button>
+      </li>
+    </ul>
+  );
+};
+
+export default TasksFilter;
+
+TasksFilter.defaultProps = {
+  filter: () => "filter",
+};
+
+TasksFilter.propTypes = {
+  filter: PropTypes.func,
+};

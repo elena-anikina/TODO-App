@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import Task from '../task/task';
+import Task from "../task/task";
 
 const TaskList = ({ data, deleteTask, editStatus, editTask, toggleStatus }) => {
   const tasks = data.map((task) => (
@@ -19,11 +19,11 @@ const TaskList = ({ data, deleteTask, editStatus, editTask, toggleStatus }) => {
 };
 
 TaskList.defaultProps = {
-  data: [{ id: 12345, name: 'Example', status: 'active', render: true }],
-  deleteTask: () => 'deleteTask',
-  editStatus: () => 'editStatus',
-  editTask: () => 'editTask',
-  toggleStatus: () => 'toggleStatus',
+  data: [{ id: 12345, name: "Example", status: "active", render: true }],
+  deleteTask: () => "deleteTask",
+  editStatus: () => "editStatus",
+  editTask: () => "editTask",
+  toggleStatus: () => "toggleStatus",
 };
 
 TaskList.propTypes = {
